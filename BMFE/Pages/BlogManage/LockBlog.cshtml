@@ -1,0 +1,33 @@
+﻿@page
+@model BMFE.Pages.BlogManage.LockBlogModel
+@{
+    ViewData["Title"] = "Cập nhật trạng thái Blog";
+}
+
+<h2>🔐 Cập nhật trạng thái Blog</h2>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <p style="color: green">@Model.Message</p>
+}
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color: red">@Model.ErrorMessage</p>
+}
+
+<form method="post">
+    <div>
+        <label for="BlogId">Nhập ID Blog:</label>
+        <input type="number" id="BlogId" name="BlogId" value="@Model.BlogId" required />
+    </div>
+
+    <div>
+        <label>Chọn trạng thái:</label>
+        <select name="NewStatus" asp-for="NewStatus">
+            <option value="2">🟢 Active</option>
+            <option value="4">🔒 Locked</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn-lock">Cập nhật trạng thái</button>
+</form>

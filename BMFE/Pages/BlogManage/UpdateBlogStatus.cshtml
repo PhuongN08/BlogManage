@@ -1,0 +1,34 @@
+﻿@page
+@model BMFE.Pages.BlogManage.UpdateBlogStatusModel
+@{
+    ViewData["Title"] = "Cập nhật trạng thái blog";
+}
+
+<h2>📝 Cập nhật trạng thái Blog</h2>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <p style="color: green">@Model.Message</p>
+}
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color: red">@Model.ErrorMessage</p>
+}
+
+<form method="post">
+    <div>
+        <label for="BlogId">ID Blog:</label>
+        <input type="number" id="BlogId" name="BlogId" value="@Model.BlogId" required />
+    </div>
+
+    <div>
+        <label for="NewStatusId">Chọn trạng thái:</label>
+        <select id="NewStatusId" name="NewStatusId" asp-for="NewStatusId">
+            <option value="1">📝 Nháp</option>
+            <option value="2">🟢 Hoạt động</option>
+            <option value="3">⚫ Ẩn</option>
+        </select>
+    </div>
+
+    <button type="submit">Cập nhật</button>
+</form>

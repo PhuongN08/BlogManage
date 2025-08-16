@@ -1,0 +1,59 @@
+﻿@page
+@model BMFE.Pages.BlogManage.CreateBlogModel
+@{
+    ViewData["Title"] = "Tạo blog mới";
+}
+
+<h2>Tạo blog mới</h2>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <div class="alert alert-success">@Model.SuccessMessage</div>
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Tiêu đề</label>
+        <input asp-for="Blog.Title" class="form-control" />
+        <span asp-validation-for="Blog.Title" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label>Tóm tắt</label>
+        <textarea asp-for="Blog.Summary" class="form-control"></textarea>
+        <span asp-validation-for="Blog.Summary" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label>Nội dung</label>
+        <textarea asp-for="Blog.Content" class="form-control" rows="10"></textarea>
+        <span asp-validation-for="Blog.Content" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label>Trạng thái (1 = Nháp, 2 = Công khai)</label>
+        <input asp-for="Blog.StatusId" type="number" class="form-control" min="1" max="2" />
+        <span asp-validation-for="Blog.StatusId" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label>Chuyên mục (CategoryId - nhập số)</label>
+        <input asp-for="Blog.CategoryId" type="number" class="form-control" />
+        <span asp-validation-for="Blog.CategoryId" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label>Ảnh đại diện (Thumbnail)</label>
+        <input asp-for="Thumbnail" type="file" class="form-control-file" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Tạo blog</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

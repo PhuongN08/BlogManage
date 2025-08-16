@@ -1,0 +1,33 @@
+﻿@page
+@model BMFE.Pages.BlogManage.ProfileModel
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+</head>
+<h2>Thông tin cá nhân</h2>
+
+@if (Model.Profile == null)
+{
+    <p>Không có dữ liệu hồ sơ để hiển thị.</p>
+}
+else
+{
+    <div>
+        <p><strong>Họ tên:</strong> @Model.Profile.Name</p>
+        <p><strong>Email:</strong> @Model.Profile.Email</p>
+        <p><strong>Số điện thoại:</strong> @Model.Profile.Phone</p>
+        <p><strong>Ngày sinh:</strong> @Model.Profile.Dob.ToString("dd/MM/yyyy")</p>
+        <p><strong>Giới tính:</strong> @Model.Profile.Sex</p>
+        <p><strong>Địa chỉ:</strong> @Model.Profile.Address</p>
+        <p><strong>Chức vụ:</strong> @Model.Profile.RoleName</p>
+        @if (!string.IsNullOrEmpty(Model.Profile.Avatar))
+        {
+            <img src="@Model.Profile.Avatar" alt="Avatar" width="150" height="150" />
+        }
+    </div>
+}

@@ -1,0 +1,39 @@
+﻿@page
+@model BMFE.Pages.BlogManage.MyBlogModel
+@{
+    ViewData["Title"] = "Bài viết của tôi";
+}
+
+<h2>Bài viết của tôi</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+</head>
+<form method="get" action="">
+    <input type="text" name="searchTerm" placeholder="Tìm kiếm..." value="@Request.Query["searchTerm"]" />
+    <button type="submit">Tìm</button>
+</form>
+
+<div id="blogList" class="mt-4">
+    @if (Model.Blogs != null && Model.Blogs.Count > 0)
+    {
+        foreach (var blog in Model.Blogs)
+        {
+            <div class="blog-post border-bottom pb-3 mb-3">
+                <h4>@blog.Title</h4>
+                <p><strong>Ngày tạo:</strong> @blog.CreatedDate.ToString("dd/MM/yyyy")</p>
+                <p>@blog.Summary</p>
+                <p><em>Tác giả: @blog.AuthorDisplayName</em></p>
+
+                <a href="/BlogManage/BlogDetail/@blog.Id">Xem Chi Tiết</a> |
+                <a href="/BlogManage/UpdateBlogStatus?blogId=@blog.Id">Cập nhật trạng thái</a> 
+            </div>
+        }
+    }
+    else
+    {
+        <p>Không có blog nào để hiển thị.</p>
+    }
+</div>

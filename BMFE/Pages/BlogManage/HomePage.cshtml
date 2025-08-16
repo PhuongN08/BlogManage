@@ -1,0 +1,83 @@
+﻿@page
+@model BMFE.Pages.BlogManage.HomePageModel
+@{
+    ViewData["Title"] = "Trang Chính";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/BlogManage/HomePage">Trang Chính</a></li>
+                @if (!string.IsNullOrEmpty(Model.Role))
+                {
+                    if (Model.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <li><a href="/BlogManage/AccountList">Quản Lý Tài Khoản</a></li>
+                        <li><a href="/BlogManage/CreateAccount">Thêm tài khoản</a></li>
+
+                    }
+                    else if (Model.Role.Equals("Manager", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <li><a href="/BlogManage/LockBlog">Quản Lý Blog</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/BlogManage/MyBlog">Blog Của Tôi</a></li>
+                        <li><a href="/BlogManage/CreateBlog">Thêm Blog</a></li>
+                    }
+                    <li><a href="/BlogManage/Profile">Hồ Sơ</a></li>
+                    <li><a href="/BlogManage/Login">Đăng Xuất</a></li>
+                }
+                else
+                {
+                    <li><a href="/BlogManage/Login">Đăng Nhập</a></li>
+                }
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <div class="alert alert-warning">@Model.Message</div>
+        }
+
+        <h3>Danh sách Blog</h3>
+
+        <!-- Form Tìm Kiếm -->
+        <form method="get" action="">
+            <input type="text" name="searchTerm" placeholder="Tìm kiếm..." value="@Request.Query["searchTerm"]" />
+            <button type="submit">Tìm</button>
+        </form>
+
+        <div id="blogList">
+            @if (Model.Blogs != null && Model.Blogs.Count > 0)
+            {
+                foreach (var blog in Model.Blogs)
+                {
+                    <div class="blog-post">
+                        <h4>@blog.Title</h4>
+                        <p><strong>Ngày tạo:</strong> @blog.CreatedDate.ToString("dd/MM/yyyy")</p>
+                        <p>@blog.Summary</p>
+                        <p><em>Tác giả: @blog.AuthorDisplayName</em></p>
+                        <a href="/BlogManage/BlogDetail/@blog.Id">Xem Chi Tiết</a> <!-- Cập nhật đường dẫn đến trang chi tiết -->
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Không có blog nào để hiển thị.</p>
+            }
+        </div>
+    </main>
+</body>
+</html>

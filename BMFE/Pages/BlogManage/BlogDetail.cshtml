@@ -1,0 +1,91 @@
+﻿@page "{id:int}"
+@model BMFE.Pages.BlogManage.BlogDetailModel
+
+@{
+    ViewData["Title"] = Model.Blog?.Title ?? "Chi Tiết Blog";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/BlogManage/HomePage">Trang Chính</a></li>
+                @if (!string.IsNullOrEmpty(Model.Role))
+                {
+                    if (Model.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <li><a href="/AccountManage">Quản Lý Tài Khoản</a></li>
+                    }
+                    else if (Model.Role.Equals("Manager", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <li><a href="/BlogManage">Quản Lý Blog</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/BlogManage/MyBlog">Blog Của Tôi</a></li>
+                        <li><a href="/BlogManage/CreateBlog">Thêm Blog</a></li>
+                    }
+                    <li><a href="/BlogManage/Profile">Hồ Sơ</a></li>
+                    <li><a href="/BlogManage/Login">Đăng Xuất</a></li>
+                }
+                else
+                {
+                    <li><a href="/BlogManage/Login">Đăng Nhập</a></li>
+                }
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        @if (Model.Blog != null)
+        {
+            <div class="blog-detail">
+                <h1 class="blog-title">@Model.Blog.Title</h1>
+                <p class="blog-meta">Ngày tạo: @Model.Blog.CreatedDate.ToString("dd/MM/yyyy") | Danh mục: @Model.Blog.CategoryName</p>
+                <div class="blog-content">
+                    <p>@Model.Blog.Content</p>
+                </div>
+                @if (Model.Role?.Equals("Manager", StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    <a href="/BlogManage/LockBlog" class="btn-lock" onclick="return confirm('Bạn có chắc muốn khóa blog này không?');">
+                        🔒 Khóa Blog
+                    </a>
+                }
+
+
+            </div>
+
+            <h3>Bình luận</h3>
+            <div class="comments-section">
+                @if (Model.Blog.Comments != null && Model.Blog.Comments.Count > 0)
+                {
+                    foreach (var comment in Model.Blog.Comments)
+                    {
+                        <div class="comment-block">
+                            <p class="comment-author"><strong>@comment.DisplayName ??""</strong></p>
+                            <p class="comment-content">@comment.Content</p>
+                            <p class="comment-date"><em>Ngày: @comment.CreatedDate.ToString("dd/MM/yyyy")</em></p>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Chưa có bình luận nào.</p>
+                }
+            </div>
+        }
+        else
+        {
+            <p>Không tìm thấy blog.</p>
+        }
+    </main>
+</body>
+</html>

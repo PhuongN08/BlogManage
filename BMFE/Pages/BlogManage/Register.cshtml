@@ -1,0 +1,80 @@
+﻿@page
+@model BMFE.Pages.BlogManage.RegisterModel
+@{
+    ViewData["Title"] = "Đăng Ký";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+</head>
+<body>
+
+    <h2>Đăng Ký</h2>
+
+    <form method="post" class="registration-form">
+        <div class="form-group">
+            <label>Tên đăng nhập:</label>
+            <input asp-for="RegisterInfo.Username" required />
+            <span asp-validation-for="RegisterInfo.Username" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Mật khẩu:</label>
+            <input asp-for="RegisterInfo.Password" type="password" required />
+            <span asp-validation-for="RegisterInfo.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Tên:</label>
+            <input asp-for="RegisterInfo.Name" required />
+            <span asp-validation-for="RegisterInfo.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Tên hiển thị:</label>
+            <input asp-for="RegisterInfo.DisplayName" required />
+            <span asp-validation-for="RegisterInfo.DisplayName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Địa chỉ:</label>
+            <input asp-for="RegisterInfo.Address" required />
+            <span asp-validation-for="RegisterInfo.Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Ngày sinh:</label>
+            <input asp-for="RegisterInfo.Dob" type="date" required />
+            <span asp-validation-for="RegisterInfo.Dob" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Giới tính:</label>
+            <select asp-for="RegisterInfo.Sex" required>
+                <option value="true">Nam</option>
+                <option value="false">Nữ</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Số điện thoại:</label>
+            <input asp-for="RegisterInfo.Phone" required />
+            <span asp-validation-for="RegisterInfo.Phone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input asp-for="RegisterInfo.Email" required />
+            <span asp-validation-for="RegisterInfo.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Ảnh đại diện:</label>
+            <input asp-for="RegisterInfo.Avatar" type="text" placeholder="Đường dẫn ảnh (nếu có)" />
+        </div>
+
+        <button type="submit" class="submit-button">Đăng Ký</button>
+    </form>
+
+    <div class="login-link" style="margin-top: 20px;">
+        <a href="/BlogManage/Login">Đã có tài khoản? Đăng nhập ngay!</a>
+    </div>
+
+</body>
+</html>

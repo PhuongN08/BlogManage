@@ -1,0 +1,88 @@
+﻿@page
+@model BMFE.Pages.Admin.CreateAccountModel
+@{
+    ViewData["Title"] = "Tạo tài khoản mới";
+}
+
+<h2>Tạo tài khoản mới</h2>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-success">@Model.Message</div>
+}
+
+<form method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.Username" class="form-label"></label>
+        <input asp-for="CreateAccountVM.Username" class="form-control" />
+        <span asp-validation-for="CreateAccountVM.Username" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.Password" class="form-label"></label>
+        <input asp-for="CreateAccountVM.Password" type="password" class="form-control" />
+        <span asp-validation-for="CreateAccountVM.Password" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.Name" class="form-label"></label>
+        <input asp-for="CreateAccountVM.Name" class="form-control" />
+        <span asp-validation-for="CreateAccountVM.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.DisplayName" class="form-label"></label>
+        <input asp-for="CreateAccountVM.DisplayName" class="form-control" />
+        <span asp-validation-for="CreateAccountVM.DisplayName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.Email" class="form-label"></label>
+        <input asp-for="CreateAccountVM.Email" class="form-control" />
+        <span asp-validation-for="CreateAccountVM.Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.Address" class="form-label"></label>
+        <input asp-for="CreateAccountVM.Address" class="form-control" />
+        <span asp-validation-for="CreateAccountVM.Address" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.Dob" class="form-label"></label>
+        <input asp-for="CreateAccountVM.Dob" type="date" class="form-control" />
+        <span asp-validation-for="CreateAccountVM.Dob" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.Sex" class="form-label"></label>
+        <select asp-for="CreateAccountVM.Sex" class="form-select">
+            <option value="">-- Chọn giới tính --</option>
+            <option value="0">Nữ</option>
+            <option value="1">Nam</option>
+        </select>
+        <span asp-validation-for="CreateAccountVM.Sex" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.Phone" class="form-label"></label>
+        <input asp-for="CreateAccountVM.Phone" class="form-control" />
+        <span asp-validation-for="CreateAccountVM.Phone" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CreateAccountVM.RoleName" class="form-label"></label>
+        <select asp-for="CreateAccountVM.RoleName" class="form-select">
+            <option value="">-- Chọn vai trò --</option>
+            <option value="Writer">Writer</option>
+            <option value="Manager">Manager</option>
+        </select>
+        <span asp-validation-for="CreateAccountVM.RoleName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
